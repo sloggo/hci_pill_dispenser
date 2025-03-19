@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">Dispense History for {{ patient.name }}</h5>
+        <a href="{{ url_for('index') }}" class="btn btn-sm btn-secondary">Back to Dashboard</a>
+    </div>
+    <div class="card-body">
+        {% if history %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Medication</th>
+                            <th>Pills Dispensed</th>
+                            <th>Prescription ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in history %}
+                            <tr>
+                                <td>{{ entry.dispense_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td>{{ entry.medication }}</td>
+                                <td>{{ entry.pills_dispensed }}</td>
+                                <td>#{{ entry.prescription_id }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-muted">No dispense history found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

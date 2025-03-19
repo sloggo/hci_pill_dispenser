@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Add New Prescription</h5>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label for="patient_id" class="form-label">Patient</label>
+                <select class="form-select" id="patient_id" name="patient_id" required>
+                    <option value="">Select a patient</option>
+                    {% for patient in patients %}
+                        <option value="{{ patient.id }}">{{ patient.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Select Medications (Funnels)</label>
+                <div class="list-group">
+                    {% for funnel in funnels %}
+                        <label class="list-group-item">
+                            <input class="form-check-input me-1" type="checkbox" name="funnel_ids" value="{{ funnel.id }}">
+                            {{ funnel.name }} ({{ funnel.medication }})
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="dosage" class="form-label">Dosage (pills per medication)</label>
+                <input type="number" class="form-control" id="dosage" name="dosage" required min="1">
+                <small class="text-muted">This number of pills will be dispensed from each selected funnel.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Prescription</button>
+        </form>
+    </div>
+</div>
+{% endblock %} 

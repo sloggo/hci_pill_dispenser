@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Configure {{ funnel.name }}</h5>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label for="medication" class="form-label">Medication Name</label>
+                <input type="text" class="form-control" id="medication" name="medication" 
+                       value="{{ funnel.medication }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="capacity" class="form-label">Capacity (number of pills)</label>
+                <input type="number" class="form-control" id="capacity" name="capacity" 
+                       value="{{ funnel.capacity }}" required min="1">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Configuration</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %} 
